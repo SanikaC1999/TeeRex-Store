@@ -1,0 +1,52 @@
+<div class="search-container">
+    <input
+      type="text"
+      placeholder="Search..."
+      [(ngModel)]="searchQuery"
+      (keyup.enter)="searchProducts()"
+    />
+    <button class="search-button-container" (click)="searchProducts()">Search</button>
+  </div>
+  
+  <div class="filter-container">
+    <label for="gender">Gender:</label>
+    <select id="gender" [(ngModel)]="filters.gender" (change)="applyFilters()">
+      <option value="">All</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+  
+    <label for="color">Color:</label>
+    <input
+      type="text"
+      id="color"
+      [(ngModel)]="filters.color"
+      (input)="applyFilters()"
+    />
+  
+    <label for="priceRange">Price Range:</label>
+    <select id="priceRange" [(ngModel)]="filters.priceRange" (change)="applyFilters()">
+      <option value="">All</option>
+      <option value="low">Low (Under 500)</option>
+      <option value="medium">Medium (500 - 1000)</option>
+      <option value="high">High (Above 1000)</option>
+    </select>
+  
+    <label for="type">Type:</label>
+    <input
+      type="text"
+      id="type"
+      [(ngModel)]="filters.type"
+      (input)="applyFilters()"
+    />
+  </div>
+  
+  <div class="product-list">
+    <div *ngFor="let product of filteredProducts" class="product-card">
+      <img [src]="product.imageURL" alt="{{ product.name }}" />
+      <h3>{{ product.name }}</h3>
+      <p>Price: ₹{{ product.price }}</p>
+      <button (click)="addToCart(product)">Add to Cart</button>
+    </div>
+  </div>
+  
